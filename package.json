@@ -82,7 +82,9 @@
     "@types/react": "^16.9.19",
     "@types/react-dom": "^16.9.5",
     "electron-squirrel-startup": "^1.0.0",
+    "material-ui": "^0.20.2",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react-dom": "^16.12.0",
+    "styled-components": "^5.0.1"
   }
 }
