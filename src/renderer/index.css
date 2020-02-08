@@ -3,4 +3,5 @@ body {
     Roboto, Helvetica, Arial, sans-serif;
   margin: 0;
   padding: 0;
+  background-color: #fafafa; /* aka colors.light */
 }
