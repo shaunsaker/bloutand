@@ -2,15 +2,17 @@ import React from "react";
 
 import { Container, Text, LogoText, VersionText } from "./styles";
 
-interface Props {}
+interface Props {
+  version: string;
+}
 
-const Logo: React.FC<Props> = () => {
+const Logo: React.FC<Props> = ({ version }) => {
   return (
     <Container>
       <Text>
         <LogoText>bloutand</LogoText>
 
-        <VersionText> v1.0.0</VersionText>
+        <VersionText> v{version}</VersionText>
       </Text>
     </Container>
   );
