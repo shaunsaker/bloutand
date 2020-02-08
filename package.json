@@ -9,7 +9,9 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "echo \"No linting configured\""
+    "lint": "echo \"No linting configured\"",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "keywords": [],
   "author": {
@@ -63,6 +65,7 @@
     }
   },
   "devDependencies": {
+    "@babel/core": "^7.8.4",
     "@electron-forge/cli": "6.0.0-beta.48",
     "@electron-forge/maker-deb": "6.0.0-beta.48",
     "@electron-forge/maker-rpm": "6.0.0-beta.48",
@@ -70,6 +73,11 @@
     "@electron-forge/maker-zip": "6.0.0-beta.48",
     "@electron-forge/plugin-webpack": "6.0.0-beta.48",
     "@marshallofsound/webpack-asset-relocator-loader": "^0.5.0",
+    "@storybook/addon-actions": "^5.3.12",
+    "@storybook/addon-links": "^5.3.12",
+    "@storybook/addons": "^5.3.12",
+    "@storybook/react": "^5.3.12",
+    "babel-loader": "^8.0.6",
     "css-loader": "^3.0.0",
     "electron": "8.0.0",
     "fork-ts-checker-webpack-plugin": "^4.0.3",
