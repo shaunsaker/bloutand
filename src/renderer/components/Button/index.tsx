@@ -1,11 +1,11 @@
 import React from "react";
 
-import Button from "./Button";
+import Button, { Props as ButtonProps } from "./Button";
 
-interface Props {}
+interface Props extends ButtonProps {}
 
-const ButtonContainer: React.FC<Props> = () => {
-  return <Button />;
+const ButtonContainer: React.FC<Props> = props => {
+  return <Button {...props} />;
 };
 
 export default ButtonContainer;

@@ -1,8 +1,8 @@
 import React from "react";
 
-import Layout from "./Layout";
+import Layout, { Props as LayoutProps } from "./Layout";
 
-interface Props {}
+interface Props extends LayoutProps {}
 
 const LayoutContainer: React.FC<Props> = () => {
   return <Layout />;

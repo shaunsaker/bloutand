@@ -2,7 +2,7 @@ import React from "react";
 
 import { Container, Text, LogoText, VersionText } from "./styles";
 
-interface Props {
+export interface Props {
   version: string;
 }
 

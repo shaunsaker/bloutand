@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 
 import { Button } from "./styles";
 
-interface Props {
+export interface Props {
   type: "primary" | "secondary";
   startIcon?: ReactNode;
   endIcon?: ReactNode;

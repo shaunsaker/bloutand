@@ -4,7 +4,7 @@ import { Container } from "@material-ui/core";
 import { Wrapper, LogoContainer } from "./styles";
 import Logo from "../Logo";
 
-interface Props {}
+export interface Props {}
 
 const Layout: React.FC<Props> = ({ children }) => {
   return (
