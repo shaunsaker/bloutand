@@ -1,11 +1,22 @@
 import React from "react";
+import { RouteComponentProps } from "@reach/router";
 
-import ScanningView, { Props as ScanningViewProps } from "./ScanningView";
+import ScanningView from "./ScanningView";
 
-interface Props extends ScanningViewProps {}
+interface Props extends RouteComponentProps {}
 
 const ScanningViewContainer: React.FC<Props> = ({ ...props }) => {
-  return <ScanningView {...props} />;
+  const onRescanForDevices = () => {};
+  const onConnectToDevice = () => {};
+
+  return (
+    <ScanningView
+      devices={[]}
+      handleRescanForDevices={onRescanForDevices}
+      handleConnectToDevice={onConnectToDevice}
+      {...props}
+    />
+  );
 };
 
 export default ScanningViewContainer;

@@ -1,11 +1,18 @@
 import React from "react";
+import { RouteComponentProps, useHistory } from "react-router-dom";
 
-import HomeView, { Props as HomeViewProps } from "./HomeView";
+import HomeView from "./HomeView";
 
-interface Props extends HomeViewProps {}
+interface Props extends RouteComponentProps {}
 
 const HomeViewContainer: React.FC<Props> = ({ ...props }) => {
-  return <HomeView {...props} />;
+  const history = useHistory();
+
+  const onScanForDevices = () => {
+    history.push("/devices");
+  };
+
+  return <HomeView handleScanForDevices={onScanForDevices} {...props} />;
 };
 
 export default HomeViewContainer;

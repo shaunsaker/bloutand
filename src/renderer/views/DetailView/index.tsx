@@ -1,11 +1,27 @@
 import React from "react";
+import { RouteComponentProps } from "@reach/router";
 
-import DetailView, { Props as DetailViewProps } from "./DetailView";
+import DetailView from "./DetailView";
 
-interface Props extends DetailViewProps {}
+interface Props extends RouteComponentProps {}
 
 const DetailViewContainer: React.FC<Props> = ({ ...props }) => {
-  return <DetailView {...props} />;
+  const onDisconnectFromDevice = () => {};
+  const onSelectService = () => {};
+  const onSelectCharacteristic = () => {};
+
+  return (
+    <DetailView
+      deviceId=""
+      services={[]}
+      characteristics={[]}
+      data={[]}
+      handleDisconnectFromDevice={onDisconnectFromDevice}
+      handleSelectService={onSelectService}
+      handleSelectCharacteristic={onSelectCharacteristic}
+      {...props}
+    />
+  );
 };
 
 export default DetailViewContainer;
