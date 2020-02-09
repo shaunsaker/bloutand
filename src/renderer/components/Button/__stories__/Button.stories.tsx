@@ -1,6 +1,6 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import ChevronRightRoundedIcon from "@material-ui/icons/ChevronRightRounded";
+import { ArrowForward as ArrowForwardIcon } from "@material-ui/icons";
 import ClearRoundedIcon from "@material-ui/icons/ClearRounded";
 
 import Button from "../Button";
@@ -9,11 +9,7 @@ const onClick = () => alert("Clicked");
 
 storiesOf("Components|Button", module)
   .add("primary", () => (
-    <Button
-      kind="primary"
-      endIcon={<ChevronRightRoundedIcon />}
-      onClick={onClick}
-    >
+    <Button kind="primary" endIcon={<ArrowForwardIcon />} onClick={onClick}>
       Connect
     </Button>
   ))
