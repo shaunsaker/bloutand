@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import { rhythm } from "../../config";
 
-export const DeviceListContainer = styled.div`
+export const ContentContainer = styled.div`
   margin-top: ${rhythm.vt}px;
 `;
 

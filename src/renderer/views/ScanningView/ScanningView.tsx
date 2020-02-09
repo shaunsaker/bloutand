@@ -1,7 +1,7 @@
 import React from "react";
 import SyncRoundedIcon from "@material-ui/icons/SyncRounded";
 
-import { DeviceListContainer, DeviceItemContainer } from "./styles";
+import { ContentContainer, DeviceItemContainer } from "./styles";
 import Layout from "../../components/Layout";
 import ViewHeader from "../../components/ViewHeader";
 import Button from "../../components/Button";
@@ -38,7 +38,7 @@ const ScanningView: React.FC<Props> = ({
         ) : null}
       </ViewHeader>
 
-      <DeviceListContainer>
+      <ContentContainer>
         {isScanning ? (
           <>
             <DeviceItemContainer>
@@ -58,7 +58,7 @@ const ScanningView: React.FC<Props> = ({
             </DeviceItemContainer>
           ))
         )}
-      </DeviceListContainer>
+      </ContentContainer>
     </Layout>
   );
 };
