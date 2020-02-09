@@ -10,7 +10,7 @@ const onClick = () => alert("Clicked");
 storiesOf("Components|Button", module)
   .add("primary", () => (
     <Button
-      type="primary"
+      kind="primary"
       endIcon={<ChevronRightRoundedIcon />}
       onClick={onClick}
     >
@@ -18,7 +18,7 @@ storiesOf("Components|Button", module)
     </Button>
   ))
   .add("secondary", () => (
-    <Button type="secondary" endIcon={<ClearRoundedIcon />} onClick={onClick}>
+    <Button kind="secondary" endIcon={<ClearRoundedIcon />} onClick={onClick}>
       Disconnect
     </Button>
   ));

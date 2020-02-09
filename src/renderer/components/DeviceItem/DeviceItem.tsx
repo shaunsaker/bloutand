@@ -13,7 +13,7 @@ const DeviceItem: React.FC<Props> = ({ name, handleClick }) => {
     <Container>
       <Text>{name}</Text>
 
-      <Button type="primary" onClick={handleClick}>
+      <Button kind="primary" onClick={handleClick}>
         Connect
       </Button>
     </Container>

@@ -11,7 +11,7 @@ storiesOf("Components|PageHeader", module)
   .add("default", () => <PageHeader text="Scanning for devices..." />)
   .add("with children", () => (
     <PageHeader text="Discovered Devices">
-      <Button type="secondary" endIcon={<SyncRounded />} onClick={onClick}>
+      <Button kind="secondary" endIcon={<SyncRounded />} onClick={onClick}>
         Rescan
       </Button>
     </PageHeader>
