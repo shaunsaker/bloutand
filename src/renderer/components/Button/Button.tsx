@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 
-import { Button } from "./styles";
+import { StyledButton } from "./styles";
 
 export interface Props {
   type: "primary" | "secondary";
@@ -10,7 +10,7 @@ export interface Props {
   children: ReactNode;
 }
 
-const ButtonComponent: React.FC<Props> = ({
+const Button: React.FC<Props> = ({
   type,
   startIcon,
   endIcon,
@@ -18,7 +18,7 @@ const ButtonComponent: React.FC<Props> = ({
   children
 }) => {
   return (
-    <Button
+    <StyledButton
       variant={type === "primary" ? "contained" : "outlined"}
       color={type}
       startIcon={startIcon}
@@ -26,8 +26,8 @@ const ButtonComponent: React.FC<Props> = ({
       onClick={onClick}
     >
       {children}
-    </Button>
+    </StyledButton>
   );
 };
 
-export default ButtonComponent;
+export default Button;
