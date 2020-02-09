@@ -2,17 +2,17 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import SyncRounded from "@material-ui/icons/SyncRounded";
 
-import PageHeader from "../PageHeader";
+import ViewHeader from "../ViewHeader";
 import Button from "../../Button";
 
 const onClick = () => alert("Clicked");
 
-storiesOf("Components|PageHeader", module)
-  .add("default", () => <PageHeader text="Scanning for devices..." />)
+storiesOf("Components|ViewHeader", module)
+  .add("default", () => <ViewHeader text="Scanning for devices..." />)
   .add("with children", () => (
-    <PageHeader text="Discovered Devices">
+    <ViewHeader text="Discovered Devices">
       <Button kind="secondary" endIcon={<SyncRounded />} onClick={onClick}>
         Rescan
       </Button>
-    </PageHeader>
+    </ViewHeader>
   ));

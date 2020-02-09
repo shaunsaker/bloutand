@@ -7,7 +7,7 @@ export interface Props {
   children?: ReactNode;
 }
 
-const PageHeader: React.FC<Props> = ({ text, children }) => {
+const ViewHeader: React.FC<Props> = ({ text, children }) => {
   return (
     <Container>
       <Text>{text}</Text>
@@ -19,4 +19,4 @@ const PageHeader: React.FC<Props> = ({ text, children }) => {
   );
 };
 
-export default PageHeader;
+export default ViewHeader;
