@@ -8,7 +8,7 @@ export const StyledSelect = styled(Select)`
     padding: ${rhythm.vt / 2}px ${rhythm.hz * 2 - rhythm.hz / 6}px
       ${rhythm.vt / 2}px ${rhythm.hz}px;
     background-color: ${colors.primary};
-    border-radius: 4px 4px 0 0;
+    border-radius: ${rhythm.br}px ${rhythm.br}px 0 0;
     color: ${colors.light};
   }
 
