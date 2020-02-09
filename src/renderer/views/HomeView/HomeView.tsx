@@ -7,7 +7,7 @@ import Button from "../../components/Button";
 
 export interface Props {}
 
-const Home: React.FC<Props> = () => {
+const HomeView: React.FC<Props> = () => {
   return (
     <Layout>
       <Container>
@@ -21,4 +21,4 @@ const Home: React.FC<Props> = () => {
   );
 };
 
-export default Home;
+export default HomeView;
