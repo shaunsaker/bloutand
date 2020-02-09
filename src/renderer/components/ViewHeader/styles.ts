@@ -7,13 +7,14 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: ${rhythm.vt}px;
+  padding: ${rhythm.vt * 4}px 0 ${rhythm.vt}px;
 `;
 
 export const Text = styled.h1`
   font-family: "Source Sans Pro", sans-serif;
   font-size: 24px;
   color: ${colors.dark};
+  margin: 0;
 `;
 
 export const Border = styled.div`
