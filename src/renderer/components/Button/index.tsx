@@ -4,7 +4,7 @@ import Button, { Props as ButtonProps } from "./Button";
 
 interface Props extends ButtonProps {}
 
-const ButtonContainer: React.FC<Props> = props => {
+const ButtonContainer: React.FC<Props> = ({ ...props }) => {
   return <Button {...props} />;
 };
 
