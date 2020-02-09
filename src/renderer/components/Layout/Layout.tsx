@@ -1,7 +1,6 @@
 import React from "react";
-import { Container } from "@material-ui/core";
 
-import { Wrapper, LogoContainer } from "./styles";
+import { Wrapper, StyledContainer, LogoContainer } from "./styles";
 import Logo from "../Logo";
 
 export interface Props {}
@@ -9,7 +8,7 @@ export interface Props {}
 const Layout: React.FC<Props> = ({ children }) => {
   return (
     <Wrapper>
-      <Container maxWidth="md">{children}</Container>
+      <StyledContainer maxWidth="sm">{children}</StyledContainer>
 
       <LogoContainer>
         <Logo />
