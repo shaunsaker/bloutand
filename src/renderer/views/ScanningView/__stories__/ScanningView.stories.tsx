@@ -2,9 +2,8 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 
 import ScanningView from "../ScanningView";
-import { DeviceId } from "../../../types";
+import { devices } from "../../../__mocks__";
 
-const devices: DeviceId[] = ["Galaxy A50", "iPhone 7", "Nexus 6s"];
 const handleConnectToDevice = () => alert("Connect clicked.");
 const handleRescanForDevices = () => alert("Rescan clicked.");
 
