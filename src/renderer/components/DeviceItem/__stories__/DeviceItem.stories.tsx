@@ -6,5 +6,5 @@ import DeviceItem from "../DeviceItem";
 const handleClick = () => alert("Clicked");
 
 storiesOf("Components|DeviceItem", module).add("default", () => (
-  <DeviceItem name="Galaxy A50" handleClick={handleClick} />
+  <DeviceItem handleClick={handleClick}>Galaxy A50</DeviceItem>
 ));

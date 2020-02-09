@@ -1,19 +1,24 @@
-import React from "react";
+import React, { ReactNode } from "react";
+import { ArrowForward as ArrowForwardIcon } from "@material-ui/icons";
 
 import { Container, Text } from "./styles";
 import Button from "../Button";
 
 export interface Props {
-  name: string;
   handleClick: () => void;
+  children: ReactNode;
 }
 
-const DeviceItem: React.FC<Props> = ({ name, handleClick }) => {
+const DeviceItem: React.FC<Props> = ({ handleClick, children }) => {
   return (
     <Container>
-      <Text>{name}</Text>
+      <Text>{children}</Text>
 
-      <Button kind="primary" onClick={handleClick}>
+      <Button
+        kind="primary"
+        endIcon={<ArrowForwardIcon />}
+        onClick={handleClick}
+      >
         Connect
       </Button>
     </Container>
