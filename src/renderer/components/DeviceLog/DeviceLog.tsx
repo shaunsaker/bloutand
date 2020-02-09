@@ -11,11 +11,7 @@ import "react-vis/dist/style.css";
 
 import styles from "./styles";
 import { colors } from "../../config";
-
-interface DataPoint {
-  x: number;
-  y: number;
-}
+import { DataPoint } from "../../types";
 
 export interface Props {
   yAxisTitle: string;

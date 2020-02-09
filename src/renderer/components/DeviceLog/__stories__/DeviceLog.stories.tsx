@@ -2,9 +2,10 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 
 import DeviceLog from "../DeviceLog";
+import { DataPoint } from "../../../types";
 
 const yAxisTitle = "Battery Level";
-const data = [
+const data: DataPoint[] = [
   {
     x: 1,
     y: 1.0
