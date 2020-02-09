@@ -11,7 +11,7 @@ storiesOf("Components|Layout", module).add("default", () => (
         margin: "auto",
         width: "100%",
         height: "100vh",
-        backgroundColor: colors.grey
+        backgroundColor: colors.lightGrey
       }}
     />
   </Layout>
