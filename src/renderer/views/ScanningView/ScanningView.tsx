@@ -12,7 +12,7 @@ import { DeviceId } from "../../types";
 export interface Props {
   devices: DeviceId[];
   isScanning?: boolean;
-  handleConnectToDevice: () => void;
+  handleConnectToDevice: (deviceId: DeviceId) => void;
   handleRescanForDevices: () => void;
 }
 
@@ -52,7 +52,7 @@ const ScanningView: React.FC<Props> = ({
         ) : (
           devices.map(deviceId => (
             <DeviceItemContainer key={deviceId}>
-              <DeviceItem handleClick={() => handleConnectToDevice}>
+              <DeviceItem handleClick={() => handleConnectToDevice(deviceId)}>
                 {deviceId}
               </DeviceItem>
             </DeviceItemContainer>
