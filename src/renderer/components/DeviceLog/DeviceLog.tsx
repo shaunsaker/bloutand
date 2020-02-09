@@ -20,7 +20,7 @@ export interface Props {
 
 const DeviceLog: React.FC<Props> = ({ yAxisTitle, data }) => {
   return (
-    <XYPlot width={460} height={300} style={styles.xyPlot}>
+    <XYPlot width={552} height={300} style={styles.xyPlot}>
       <VerticalGridLines />
 
       <HorizontalGridLines />
