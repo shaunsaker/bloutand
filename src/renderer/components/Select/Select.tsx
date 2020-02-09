@@ -6,13 +6,23 @@ import { StyledSelect } from "./styles";
 type Value = string;
 
 export interface Props extends SelectProps {
-  value: Value;
+  placeholder: string;
+  value?: Value;
   options: Value[];
 }
 
-const Select: React.FC<Props> = ({ value, options, onChange }) => {
+const Select: React.FC<Props> = ({
+  placeholder,
+  value = placeholder,
+  options,
+  ...props
+}) => {
   return (
-    <StyledSelect variant="filled" value={value} onChange={onChange}>
+    <StyledSelect variant="filled" value={value} {...props}>
+      <MenuItem value={placeholder} disabled>
+        {placeholder}
+      </MenuItem>
+
       {options.map(option => (
         <MenuItem key={option} value={option}>
           {option}
