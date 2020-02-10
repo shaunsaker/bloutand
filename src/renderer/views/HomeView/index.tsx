@@ -8,8 +8,13 @@ interface Props extends RouteComponentProps {}
 const HomeViewContainer: React.FC<Props> = ({ ...props }) => {
   const history = useHistory();
 
-  const onScanForDevices = () => {
-    history.push("/devices");
+  const onScanForDevices = async () => {
+    history.push({
+      pathname: "/devices",
+      state: {
+        shouldStartScanning: true
+      }
+    });
   };
 
   return <HomeView handleScanForDevices={onScanForDevices} {...props} />;
