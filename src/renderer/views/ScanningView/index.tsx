@@ -1,22 +1,68 @@
-import React from "react";
-import { RouteComponentProps } from "@reach/router";
+import React, { useState, useEffect } from "react";
+import { RouteComponentProps, withRouter } from "react-router-dom";
+import { ipcRenderer } from "electron";
 
 import ScanningView from "./ScanningView";
+import WebBle from "../../services/WebBle";
+import { DeviceId, Device } from "../../types";
 
-interface Props extends RouteComponentProps {}
+interface LocationProps extends Location {
+  state: {
+    shouldStartScanning?: boolean;
+  };
+}
 
-const ScanningViewContainer: React.FC<Props> = ({ ...props }) => {
-  const onRescanForDevices = () => {};
+interface Props extends RouteComponentProps<any> {
+  location: LocationProps;
+}
+
+const ScanningViewContainer: React.FC<Props> = ({ location }) => {
+  const [isScanning, setIsScanning] = useState<boolean>(false);
+  const [devices, setDevices] = useState<Device[]>([]);
+
+  const scanForDevices = () => {
+    setIsScanning(true);
+
+    WebBle.startScanning((deviceId: DeviceId, name: string) => {
+      console.log("IN CALLBACK", deviceId, name); // TODO: Set it to state?
+      setIsScanning(false);
+    });
+  };
+
+  const onRescanForDevices = () => {
+    scanForDevices();
+  };
+
   const onConnectToDevice = () => {};
+
+  useEffect(() => {
+    /*
+     * Add an event listener to electron's renderer so that
+     * we can listen for the bluetooth device list returned by WebBle
+     */
+    ipcRenderer.on("channelForBluetoothDeviceList", (event, deviceList) => {
+      console.log({ deviceList });
+      setDevices(deviceList);
+    });
+
+    /*
+     * If the flag shouldStartScanning is present on the route's history state
+     * Start scanning
+     * We need to do this because the web bluetooth api requires a user gesture to trigger any of it's * methods
+     */
+    if (location && location.state && location.state.shouldStartScanning) {
+      scanForDevices();
+    }
+  }, []);
 
   return (
     <ScanningView
-      devices={[]}
+      devices={devices}
+      isScanning={isScanning}
       handleRescanForDevices={onRescanForDevices}
       handleConnectToDevice={onConnectToDevice}
-      {...props}
     />
   );
 };
 
-export default ScanningViewContainer;
+export default withRouter(ScanningViewContainer);
