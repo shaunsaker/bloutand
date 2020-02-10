@@ -7,12 +7,12 @@ import ViewHeader from "../../components/ViewHeader";
 import Button from "../../components/Button";
 import Skeleton from "../../components/Skeleton";
 import DeviceItem from "../../components/DeviceItem";
-import { DeviceId } from "../../types";
+import { Device } from "../../types";
 
 export interface Props {
-  devices: DeviceId[];
+  devices: Device[];
   isScanning?: boolean;
-  handleConnectToDevice: (deviceId: DeviceId) => void;
+  handleConnectToDevice: (device: Device) => void;
   handleRescanForDevices: () => void;
 }
 
@@ -50,13 +50,17 @@ const ScanningView: React.FC<Props> = ({
             </DeviceItemContainer>
           </>
         ) : (
-          devices.map(deviceId => (
-            <DeviceItemContainer key={deviceId}>
-              <DeviceItem handleClick={() => handleConnectToDevice(deviceId)}>
-                {deviceId}
-              </DeviceItem>
-            </DeviceItemContainer>
-          ))
+          devices.map(device => {
+            const { deviceId, name } = device;
+
+            return (
+              <DeviceItemContainer key={deviceId}>
+                <DeviceItem handleClick={() => handleConnectToDevice(device)}>
+                  {name || deviceId}
+                </DeviceItem>
+              </DeviceItemContainer>
+            );
+          })
         )}
       </ContentContainer>
     </Layout>

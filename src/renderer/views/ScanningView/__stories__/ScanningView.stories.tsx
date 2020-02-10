@@ -3,10 +3,10 @@ import { storiesOf } from "@storybook/react";
 
 import ScanningView from "../ScanningView";
 import { devices } from "../../../__mocks__";
-import { DeviceId } from "../../../types";
+import { Device } from "../../../types";
 
-const handleConnectToDevice = (deviceId: DeviceId) =>
-  alert(`Connect to ${deviceId} clicked.`);
+const handleConnectToDevice = (device: Device) =>
+  alert(`Connect to ${device.deviceId} clicked.`);
 const handleRescanForDevices = () => alert("Rescan clicked.");
 
 storiesOf("Views|ScanningView", module)

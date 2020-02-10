@@ -8,14 +8,14 @@ import Button from "../../components/Button";
 import Select from "../../components/Select";
 import DeviceLog from "../../components/DeviceLog";
 import {
-  DeviceId,
+  Device,
   ServiceUuid,
   CharacteristicUuid,
   DataPoint
 } from "../../types";
 
 export interface Props {
-  deviceId: DeviceId;
+  device: Device;
   serviceUuid?: ServiceUuid;
   services: ServiceUuid[];
   characteristicUuid?: CharacteristicUuid;
@@ -23,11 +23,11 @@ export interface Props {
   data: DataPoint[];
   handleSelectService: (serviceUuid: ServiceUuid) => void;
   handleSelectCharacteristic: (characteristicUuid: CharacteristicUuid) => void;
-  handleDisconnectFromDevice: (deviceId: DeviceId) => void;
+  handleDisconnectFromDevice: (device: Device) => void;
 }
 
 const DetailView: React.FC<Props> = ({
-  deviceId,
+  device,
   serviceUuid,
   services,
   characteristicUuid,
@@ -39,11 +39,11 @@ const DetailView: React.FC<Props> = ({
 }) => {
   return (
     <Layout>
-      <ViewHeader text={deviceId}>
+      <ViewHeader text={device.name}>
         <Button
           kind="secondary"
           endIcon={<CancelIcon />}
-          onClick={() => handleDisconnectFromDevice(deviceId)}
+          onClick={() => handleDisconnectFromDevice(device)}
         >
           Disconnect
         </Button>
