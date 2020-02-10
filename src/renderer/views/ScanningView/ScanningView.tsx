@@ -51,12 +51,12 @@ const ScanningView: React.FC<Props> = ({
           </>
         ) : (
           devices.map(device => {
-            const { deviceId, name } = device;
+            const { deviceId, deviceName } = device;
 
             return (
               <DeviceItemContainer key={deviceId}>
                 <DeviceItem handleClick={() => handleConnectToDevice(device)}>
-                  {name || deviceId}
+                  {deviceName || deviceId}
                 </DeviceItem>
               </DeviceItemContainer>
             );

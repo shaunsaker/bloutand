@@ -2,7 +2,7 @@ export type DeviceId = string;
 
 export type Device = {
   deviceId: DeviceId;
-  name: string;
+  deviceName: string;
 };
 
 export type ServiceUuid = string;

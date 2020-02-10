@@ -39,7 +39,7 @@ const DetailView: React.FC<Props> = ({
 }) => {
   return (
     <Layout>
-      <ViewHeader text={device.name}>
+      <ViewHeader text={device.deviceName}>
         <Button
           kind="secondary"
           endIcon={<CancelIcon />}

@@ -1,9 +1,9 @@
 import { Device, ServiceUuid, CharacteristicUuid, DataPoint } from "../types";
 
 export const devices: Device[] = [
-  { deviceId: "1", name: "Galaxy A50" },
-  { deviceId: "2", name: "iPhone 7" },
-  { deviceId: "3", name: "Nexus 6s" }
+  { deviceId: "1", deviceName: "Galaxy A50" },
+  { deviceId: "2", deviceName: "iPhone 7" },
+  { deviceId: "3", deviceName: "Nexus 6s" }
 ];
 
 export const services: ServiceUuid[] = [

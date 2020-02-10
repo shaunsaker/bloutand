@@ -13,7 +13,7 @@ const DetailViewContainer: React.FC<Props> = ({ ...props }) => {
   return (
     <DetailView
       device={{
-        name: "",
+        deviceName: "",
         deviceId: ""
       }}
       services={[]}
