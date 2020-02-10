@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ThemeProvider } from "@material-ui/core/styles";
+import { ThemeProvider, StylesProvider } from "@material-ui/core/styles";
 
 import "./index.css";
 import Router from "./Router";
@@ -8,7 +8,9 @@ import { theme } from "./config";
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
-      <Router />
+      <StylesProvider injectFirst>
+        <Router />
+      </StylesProvider>
     </ThemeProvider>
   );
 };
