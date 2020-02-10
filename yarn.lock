@@ -2023,6 +2023,11 @@
     "@types/react-native" "*"
     csstype "^2.2.0"
 
+"@types/web-bluetooth@^0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@types/web-bluetooth/-/web-bluetooth-0.0.5.tgz#f952d1481572798dd20a381135bef3d8b1ef305a"
+  integrity sha512-gaSAxNePCVJUR1a+4jKMaukjEzE4XuJd9fzSx/mAy6BrVoJXnACmfaBkaXU/K0frxJVfHvMDJx96hbNt4NXd9Q==
+
 "@types/webpack-env@^1.15.0":
   version "1.15.1"
   resolved "https://registry.yarnpkg.com/@types/webpack-env/-/webpack-env-1.15.1.tgz#c8e84705e08eed430b5e15b39c65b0944e4d1422"
