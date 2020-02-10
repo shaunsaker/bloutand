@@ -4,7 +4,7 @@ import { ipcRenderer } from "electron";
 
 import ScanningView from "./ScanningView";
 import WebBle from "../../services/WebBle";
-import { DeviceId, Device } from "../../types";
+import { Device } from "../../types";
 
 interface LocationProps extends Location {
   state: {
@@ -23,9 +23,8 @@ const ScanningViewContainer: React.FC<Props> = ({ location }) => {
   const scanForDevices = () => {
     setIsScanning(true);
 
-    WebBle.startScanning((deviceId: DeviceId, name: string) => {
-      console.log("IN CALLBACK", deviceId, name); // TODO: Set it to state?
-      setIsScanning(false);
+    WebBle.startScanning((deviceId, deviceName) => {
+      // TODO: This is essentially onConnect
     });
   };
 
@@ -33,16 +32,20 @@ const ScanningViewContainer: React.FC<Props> = ({ location }) => {
     scanForDevices();
   };
 
-  const onConnectToDevice = () => {};
+  const onConnectToDevice = (device: Device) => {
+    WebBle.connect(device.deviceId, () => {
+      // TODO: Handle disconnect
+    });
+  };
 
   useEffect(() => {
     /*
      * Add an event listener to electron's renderer so that
      * we can listen for the bluetooth device list returned by WebBle
      */
-    ipcRenderer.on("channelForBluetoothDeviceList", (event, deviceList) => {
-      console.log({ deviceList });
+    ipcRenderer.on("channelForBluetoothDeviceList", (_, deviceList) => {
       setDevices(deviceList);
+      setIsScanning(false);
     });
 
     /*

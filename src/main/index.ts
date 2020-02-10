@@ -23,6 +23,8 @@ if (require("electron-squirrel-startup")) {
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow: any;
 
+let callbackForBluetoothEvent = (deviceId: string) => {}; // TODO: Type this
+
 const createWindow = () => {
   // Create the browser window.
   mainWindow = new BrowserWindow({
@@ -42,13 +44,10 @@ const createWindow = () => {
 
       event.preventDefault();
 
-      const device = deviceList[0];
-
-      if (!device) {
-        callback("");
-      } else {
-        callback(device.deviceId);
-      }
+      /*
+       * Make this callback accessible outside of this function
+       */
+      callbackForBluetoothEvent = callback;
 
       mainWindow.webContents.send("channelForBluetoothDeviceList", deviceList);
     }
@@ -73,6 +72,22 @@ const createWindow = () => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on("ready", createWindow);
+
+/*
+ * Cancels discovery
+ */
+ipcMain.on("channelForTerminationSignal", _ => {
+  callbackForBluetoothEvent("");
+  console.log("Discovery cancelled");
+});
+
+/*
+ * Resolves navigator.bluetooth.requestDevice() and stops device discovery
+ */
+ipcMain.on("channelForSelectingDevice", (event, deviceId) => {
+  callbackForBluetoothEvent(deviceId);
+  console.log("Device selected", deviceId, "discovery finished");
+});
 
 // Quit when all windows are closed.
 app.on("window-all-closed", () => {
