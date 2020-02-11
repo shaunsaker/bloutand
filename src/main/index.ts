@@ -78,7 +78,6 @@ app.on("ready", createWindow);
  */
 ipcMain.on("channelForTerminationSignal", _ => {
   callbackForBluetoothEvent("");
-  console.log("Discovery cancelled");
 });
 
 /*
@@ -86,7 +85,6 @@ ipcMain.on("channelForTerminationSignal", _ => {
  */
 ipcMain.on("channelForSelectingDevice", (event, deviceId) => {
   callbackForBluetoothEvent(deviceId);
-  console.log("Device selected", deviceId, "discovery finished");
 });
 
 // Quit when all windows are closed.

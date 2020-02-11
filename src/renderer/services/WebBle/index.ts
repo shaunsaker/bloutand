@@ -51,7 +51,6 @@ const WebBle: WebBleProps = {
       navigator.bluetooth
         .requestDevice(options)
         .then(device => {
-          console.log("Connection received:", device);
           /*
            * Once a device is selected (handled by connect method)
            * Connect to it
@@ -64,14 +63,10 @@ const WebBle: WebBleProps = {
           connectedDevice = device;
 
           if (device && device.gatt) {
-            console.log("Gatt server present.");
-
             return device.gatt.connect();
           }
         })
         .then(server => {
-          console.log("Gatt server connected.");
-
           if (server) {
             connectedServer = server;
 
@@ -88,8 +83,6 @@ const WebBle: WebBleProps = {
     });
   },
   connect: (device, onDisconnect) => {
-    console.log("Connecting to", device);
-
     return new Promise(resolve => {
       handleDisconnect = onDisconnect;
 
@@ -99,8 +92,6 @@ const WebBle: WebBleProps = {
     });
   },
   read: (device, serviceUuid, characteristicUuid) => {
-    console.log("Reading from", device, serviceUuid, characteristicUuid);
-
     return new Promise((resolve, reject) => {
       const serviceUuidInt = parseInt(serviceUuid);
       const characteristicUuidInt = parseInt(characteristicUuid);
@@ -109,17 +100,12 @@ const WebBle: WebBleProps = {
         connectedServer
           .getPrimaryService(serviceUuidInt)
           .then(service => {
-            console.log("Service found. Getting characteristic...");
-
             return service.getCharacteristic(characteristicUuidInt);
           })
           .then(characteristic => {
-            console.log("Characteristic found. Reading value...");
-
             return characteristic.readValue();
           })
           .then(value => {
-            console.log("Read value", value);
             const uint8Array = convertDataViewToUint8Array(value);
 
             resolve(uint8Array);
@@ -129,8 +115,6 @@ const WebBle: WebBleProps = {
     });
   },
   subscribe: (device, serviceUuid, characteristicUuid, cb) => {
-    console.log("Subscribing to", device, serviceUuid, characteristicUuid);
-
     return new Promise((resolve, reject) => {
       const serviceUuidInt = parseInt(serviceUuid);
       const characteristicUuidInt = parseInt(characteristicUuid);
@@ -139,24 +123,16 @@ const WebBle: WebBleProps = {
         connectedServer
           .getPrimaryService(serviceUuidInt)
           .then(service => {
-            console.log("Service found. Getting characteristic...");
-
             return service.getCharacteristic(characteristicUuidInt);
           })
           .then(characteristic => {
-            console.log("Characteristic found.");
-
             connectedCharacteristic = characteristic;
 
             return connectedCharacteristic.startNotifications().then(() => {
-              console.log("Notifications started.");
-
               connectedCharacteristic?.addEventListener(
                 "characteristicvaluechanged",
 
                 event => {
-                  console.log("Received value from subscribe", event);
-
                   // @ts-ignore FIXME: Type this event (value does not exist apparently)
                   const { value } = event.target;
                   const uint8Array = convertDataViewToUint8Array(value);
