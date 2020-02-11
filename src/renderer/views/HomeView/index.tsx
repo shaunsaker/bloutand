@@ -1,20 +1,25 @@
 import React from "react";
-import { RouteComponentProps, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import HomeView from "./HomeView";
 
-interface Props extends RouteComponentProps {}
+/*
+ * Export the next route config to use in our tests
+ */
+export const nextRouteConfig = {
+  pathname: "/devices",
+  state: {
+    shouldStartScanning: true
+  }
+};
+
+interface Props {}
 
 const HomeViewContainer: React.FC<Props> = ({ ...props }) => {
   const history = useHistory();
 
   const onScanForDevices = async () => {
-    history.push({
-      pathname: "/devices",
-      state: {
-        shouldStartScanning: true
-      }
-    });
+    history.push(nextRouteConfig);
   };
 
   return <HomeView handleScanForDevices={onScanForDevices} {...props} />;
