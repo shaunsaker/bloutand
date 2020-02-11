@@ -59,7 +59,8 @@ const ScanningViewContainer: React.FC<Props> = ({ location }) => {
 
     try {
       await WebBle.connect(device.deviceId, () => {
-        console.log("Device disconnected.");
+        // This is the callback for when a device is disconnected unintentionally
+        setErrorMessage(`${device.deviceName} was disconnected.`);
       });
     } catch (error) {
       setErrorMessage(error.message);
