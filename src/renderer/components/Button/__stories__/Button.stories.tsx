@@ -3,7 +3,7 @@ import { storiesOf } from "@storybook/react";
 import { ArrowForward as ArrowForwardIcon } from "@material-ui/icons";
 import ClearRoundedIcon from "@material-ui/icons/ClearRounded";
 
-import Button from "../Button";
+import Button from "..";
 
 const onClick = () => alert("Clicked");
 

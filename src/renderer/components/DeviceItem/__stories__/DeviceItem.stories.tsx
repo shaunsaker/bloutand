@@ -1,7 +1,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 
-import DeviceItem from "../DeviceItem";
+import DeviceItem from "..";
 import { devices } from "../../../__mocks__";
 
 const handleClick = () => alert("Clicked");

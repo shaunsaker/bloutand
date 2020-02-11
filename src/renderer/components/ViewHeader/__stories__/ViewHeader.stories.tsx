@@ -2,7 +2,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import SyncRounded from "@material-ui/icons/SyncRounded";
 
-import ViewHeader from "../ViewHeader";
+import ViewHeader from "..";
 import Button from "../../Button";
 
 const onClick = () => alert("Clicked");

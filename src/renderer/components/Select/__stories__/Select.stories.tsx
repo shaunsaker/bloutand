@@ -1,7 +1,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 
-import Select from "../Select";
+import Select from "..";
 import { services } from "../../../__mocks__";
 
 const options = services.map(service => service.serviceName);

@@ -1,7 +1,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 
-import DeviceLog from "../DeviceLog";
+import DeviceLog from "..";
 import { deviceLogData } from "../../../__mocks__";
 
 const yAxisTitle = "Battery Level";

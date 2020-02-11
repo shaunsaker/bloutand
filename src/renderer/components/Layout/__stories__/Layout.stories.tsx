@@ -1,7 +1,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 
-import Layout from "../Layout";
+import Layout from "..";
 import { colors } from "../../../config";
 
 storiesOf("Components|Layout", module).add("default", () => (
