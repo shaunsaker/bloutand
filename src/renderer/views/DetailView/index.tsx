@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { RouteComponentProps, useHistory } from "react-router-dom";
-import moment from "moment";
 
 import DetailView from "./DetailView";
 import WebBle from "../../services/WebBle";

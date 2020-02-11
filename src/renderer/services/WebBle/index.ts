@@ -1,6 +1,6 @@
 import { ipcRenderer } from "electron";
 
-import { DeviceId, ServiceName } from "../../types";
+import { DeviceId } from "../../types";
 import { services } from "../../config";
 
 type StartScanningCb = (device: DeviceId, name: string) => void;
