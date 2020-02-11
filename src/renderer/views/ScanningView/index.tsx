@@ -54,12 +54,16 @@ const ScanningViewContainer: React.FC<Props> = ({ location }) => {
     scanForDevices();
   };
 
-  const onConnectToDevice = (device: Device) => {
+  const onConnectToDevice = async (device: Device) => {
     setIsConnectingDeviceId(device.deviceId);
 
-    WebBle.connect(device.deviceId, () => {
-      console.log("Device disconnected.");
-    });
+    try {
+      await WebBle.connect(device.deviceId, () => {
+        console.log("Device disconnected.");
+      });
+    } catch (error) {
+      setErrorMessage(error.message);
+    }
   };
 
   useEffect(() => {
