@@ -1,11 +1,11 @@
 import React from "react";
 
-import Skeleton, { Props as SkeletonProps } from "./Skeleton";
+import { Container } from "./styles";
 
-interface Props extends SkeletonProps {}
+export interface Props {}
 
-const SkeletonContainer: React.FC<Props> = ({ ...props }) => {
-  return <Skeleton {...props} />;
+const Skeleton: React.FC<Props> = () => {
+  return <Container />;
 };
 
-export default SkeletonContainer;
+export default Skeleton;

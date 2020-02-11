@@ -1,11 +1,36 @@
-import React from "react";
+import React, { ReactNode } from "react";
+import { ArrowForward as ArrowForwardIcon } from "@material-ui/icons";
 
-import DeviceItem, { Props as DeviceItemProps } from "./DeviceItem";
+import { Container, Text } from "./styles";
+import Button from "../Button";
 
-interface Props extends DeviceItemProps {}
+export interface Props {
+  isLoading?: boolean;
+  disabled?: boolean;
+  handleClick: () => void;
+  children: ReactNode;
+}
 
-const DeviceItemContainer: React.FC<Props> = ({ ...props }) => {
-  return <DeviceItem {...props} />;
+const DeviceItem: React.FC<Props> = ({
+  isLoading,
+  disabled,
+  handleClick,
+  children
+}) => {
+  return (
+    <Container>
+      <Text>{children}</Text>
+
+      <Button
+        kind="primary"
+        endIcon={!isLoading ? <ArrowForwardIcon /> : null}
+        disabled={disabled}
+        onClick={handleClick}
+      >
+        {isLoading ? "Connecting..." : "Connect"}
+      </Button>
+    </Container>
+  );
 };
 
-export default DeviceItemContainer;
+export default DeviceItem;

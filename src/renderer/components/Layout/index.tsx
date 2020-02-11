@@ -1,11 +1,20 @@
 import React from "react";
 
-import Layout, { Props as LayoutProps } from "./Layout";
+import { Wrapper, StyledContainer, LogoContainer } from "./styles";
+import Logo from "../Logo";
 
-interface Props extends LayoutProps {}
+export interface Props {}
 
-const LayoutContainer: React.FC<Props> = ({ ...props }) => {
-  return <Layout {...props} />;
+const Layout: React.FC<Props> = ({ children }) => {
+  return (
+    <Wrapper>
+      <StyledContainer maxWidth="sm">{children}</StyledContainer>
+
+      <LogoContainer>
+        <Logo />
+      </LogoContainer>
+    </Wrapper>
+  );
 };
 
-export default LayoutContainer;
+export default Layout;

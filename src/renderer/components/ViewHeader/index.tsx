@@ -1,11 +1,24 @@
-import React from "react";
+import React, { ReactNode } from "react";
 
-import ViewHeader, { Props as ViewHeaderProps } from "./ViewHeader";
+import { Container, TextContainer, Text, Border } from "./styles";
 
-interface Props extends ViewHeaderProps {}
+export interface Props {
+  text: string;
+  children?: ReactNode;
+}
 
-const ViewHeaderContainer: React.FC<Props> = ({ ...props }) => {
-  return <ViewHeader {...props} />;
+const ViewHeader: React.FC<Props> = ({ text, children }) => {
+  return (
+    <Container>
+      <TextContainer>
+        <Text>{text}</Text>
+
+        {children}
+      </TextContainer>
+
+      <Border />
+    </Container>
+  );
 };
 
-export default ViewHeaderContainer;
+export default ViewHeader;

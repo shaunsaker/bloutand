@@ -1,13 +1,20 @@
 import React from "react";
 
+import { Container, Text, LogoText, VersionText } from "./styles";
 import pkg from "../../../../package.json";
 
-import Logo from "./Logo";
+export interface Props {}
 
-interface Props {}
+const Logo: React.FC<Props> = () => {
+  return (
+    <Container>
+      <Text>
+        <LogoText>bloutand</LogoText>
 
-const LogoContainer: React.FC<Props> = ({ ...props }) => {
-  return <Logo {...props} version={pkg.version} />;
+        <VersionText> v{pkg.version}</VersionText>
+      </Text>
+    </Container>
+  );
 };
 
-export default LogoContainer;
+export default Logo;

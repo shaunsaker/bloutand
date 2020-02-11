@@ -1,11 +1,20 @@
 import React from "react";
+import { ButtonProps } from "@material-ui/core";
 
-import Button, { Props as ButtonProps } from "./Button";
+import { StyledButton } from "./styles";
 
-interface Props extends ButtonProps {}
+export interface Props extends ButtonProps {
+  kind: "primary" | "secondary";
+}
 
-const ButtonContainer: React.FC<Props> = ({ ...props }) => {
-  return <Button {...props} />;
+const Button: React.FC<Props> = ({ kind, ...props }) => {
+  return (
+    <StyledButton
+      variant={kind === "primary" ? "contained" : "outlined"}
+      color={kind}
+      {...props}
+    />
+  );
 };
 
-export default ButtonContainer;
+export default Button;
