@@ -9,28 +9,30 @@ import Select from "../../components/Select";
 import DeviceLog from "../../components/DeviceLog";
 import {
   Device,
-  ServiceUuid,
-  CharacteristicUuid,
+  ServiceName,
+  CharacteristicName,
   DataPoint
 } from "../../types";
 
 export interface Props {
   device: Device;
-  serviceUuid?: ServiceUuid;
-  services: ServiceUuid[];
-  characteristicUuid?: CharacteristicUuid;
-  characteristics: CharacteristicUuid[];
+  selectedService?: ServiceName;
+  services: ServiceName[];
+  selectedCharacteristic?: CharacteristicName;
+  characteristics: CharacteristicName[];
   data: DataPoint[];
-  handleSelectService: (serviceUuid: ServiceUuid) => void;
-  handleSelectCharacteristic: (characteristicUuid: CharacteristicUuid) => void;
+  handleSelectService: (selectedService: ServiceName) => void;
+  handleSelectCharacteristic: (
+    selectedCharacteristic: CharacteristicName
+  ) => void;
   handleDisconnectFromDevice: (device: Device) => void;
 }
 
 const DetailView: React.FC<Props> = ({
   device,
-  serviceUuid,
+  selectedService,
   services,
-  characteristicUuid,
+  selectedCharacteristic,
   characteristics,
   data,
   handleSelectService,
@@ -54,7 +56,7 @@ const DetailView: React.FC<Props> = ({
           <SelectContainer>
             <Select
               placeholder="Select a Service"
-              value={serviceUuid}
+              value={selectedService}
               options={services}
               handleChange={handleSelectService}
             />
@@ -63,7 +65,7 @@ const DetailView: React.FC<Props> = ({
           <SelectContainer>
             <Select
               placeholder="Select a Characteristic"
-              value={characteristicUuid}
+              value={selectedCharacteristic}
               options={characteristics}
               handleChange={handleSelectCharacteristic}
             />
@@ -71,7 +73,7 @@ const DetailView: React.FC<Props> = ({
         </SelectsContainer>
 
         {data.length ? (
-          <DeviceLog yAxisTitle={characteristicUuid || ""} data={data} />
+          <DeviceLog yAxisTitle={selectedCharacteristic || ""} data={data} />
         ) : null}
       </ContentContainer>
     </Layout>

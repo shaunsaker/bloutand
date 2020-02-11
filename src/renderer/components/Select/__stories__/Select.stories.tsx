@@ -4,21 +4,22 @@ import { storiesOf } from "@storybook/react";
 import Select from "../Select";
 import { services } from "../../../__mocks__";
 
+const options = services.map(service => service.serviceName);
 const onChange = (value: string) => alert(`${value} clicked.`);
 
 storiesOf("Components|Select", module)
   .add("default", () => (
     <Select
       placeholder="Select a Service"
-      options={services}
+      options={options}
       handleChange={onChange}
     />
   ))
   .add("with value", () => (
     <Select
       placeholder="Select a Service"
-      value={services[0]}
-      options={services}
+      value={options[0]}
+      options={options}
       handleChange={onChange}
     />
   ));

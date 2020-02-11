@@ -8,12 +8,16 @@ import {
   characteristics,
   deviceLogData
 } from "../../../__mocks__";
-import { Device, ServiceUuid, CharacteristicUuid } from "../../../types";
+import { Device, ServiceName, CharacteristicName } from "../../../types";
 
-const handleSelectService = (serviceUuid: ServiceUuid) =>
-  alert(`${serviceUuid} clicked.`);
-const handleSelectCharacteristic = (characteristicUuid: CharacteristicUuid) =>
-  alert(`${characteristicUuid} clicked.`);
+const serviceOptions = services.map(service => service.serviceName);
+const characteristicsOptions = characteristics.map(
+  characteristics => characteristics.characteristicName
+);
+const handleSelectService = (serviceName: ServiceName) =>
+  alert(`${serviceName} clicked.`);
+const handleSelectCharacteristic = (characteristicName: CharacteristicName) =>
+  alert(`${characteristicName} clicked.`);
 const handleDisconnectFromDevice = (device: Device) =>
   alert(`Disconnect from ${device.deviceId} clicked.`);
 
@@ -21,8 +25,8 @@ storiesOf("Views|DetailView", module)
   .add("default", () => (
     <DetailView
       device={devices[0]}
-      services={services}
-      characteristics={characteristics}
+      services={serviceOptions}
+      characteristics={characteristicsOptions}
       data={[]}
       handleSelectService={handleSelectService}
       handleSelectCharacteristic={handleSelectCharacteristic}
@@ -32,10 +36,10 @@ storiesOf("Views|DetailView", module)
   .add("with data", () => (
     <DetailView
       device={devices[0]}
-      serviceUuid={services[0]}
-      services={services}
-      characteristicUuid={characteristics[0]}
-      characteristics={characteristics}
+      selectedService={serviceOptions[0]}
+      services={serviceOptions}
+      selectedCharacteristic={characteristicsOptions[0]}
+      characteristics={characteristicsOptions}
       data={deviceLogData}
       handleSelectService={handleSelectService}
       handleSelectCharacteristic={handleSelectCharacteristic}

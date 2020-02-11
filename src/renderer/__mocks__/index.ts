@@ -1,4 +1,4 @@
-import { Device, ServiceUuid, CharacteristicUuid, DataPoint } from "../types";
+import { Device, Service, Characteristic, DataPoint } from "../types";
 
 export const devices: Device[] = [
   { deviceId: "1", deviceName: "Galaxy A50" },
@@ -6,17 +6,38 @@ export const devices: Device[] = [
   { deviceId: "3", deviceName: "Nexus 6s" }
 ];
 
-export const services: ServiceUuid[] = [
-  "Battery Service",
-  "Blood Pressure",
-  "Device Information",
-  "Heart Rate"
+export const services: Service[] = [
+  {
+    serviceName: "Battery Service",
+    serviceUuid: ""
+  },
+  {
+    serviceName: "Blood Pressure",
+    serviceUuid: ""
+  },
+  {
+    serviceName: "Device Information",
+    serviceUuid: ""
+  },
+  {
+    serviceName: "Heart Rate",
+    serviceUuid: ""
+  }
 ];
 
-export const characteristics: CharacteristicUuid[] = [
-  "Battery Level",
-  "Battery Level State",
-  "Battery Power State"
+export const characteristics: Characteristic[] = [
+  {
+    characteristicName: "Battery Level",
+    characteristicUuid: ""
+  },
+  {
+    characteristicName: "Battery Level State",
+    characteristicUuid: ""
+  },
+  {
+    characteristicName: "Battery Power State",
+    characteristicUuid: ""
+  }
 ];
 
 export const deviceLogData: DataPoint[] = [
