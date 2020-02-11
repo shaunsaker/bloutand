@@ -2,7 +2,7 @@
 
 ## Description
 
-An electron app written in Typescript and React that can scan for nearby BLE devices, connect/disconnect to them and read and display battery levels values from the connected device.
+An electron app written in Typescript and React that can scan for nearby BLE devices, connect/disconnect to them and read and display values of a selected service characteristic (e.g. battery levels) from the connected device.
 
 ## Development
 
@@ -17,6 +17,18 @@ yarn
 
 ```
 yarn start
+```
+
+### Storybook
+
+```
+yarn run storybook
+```
+
+### Testing
+
+```
+yarn test
 ```
 
 ## Building
