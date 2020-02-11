@@ -36,6 +36,7 @@ const DetailViewContainer: React.FC<Props> = ({ location }) => {
   >();
   const [rawData, setRawData] = useState<Uint8Array>(new Uint8Array());
   const [data, setData] = useState<Data[]>([]);
+  const [errorMessage, setErrorMessage] = useState<string>("");
   const { deviceId, deviceName } = (location && location.state) || {};
   const servicesOptions = services.map(service => service.serviceName);
   const characteristicsOptions = characteristics.map(
@@ -128,20 +129,29 @@ const DetailViewContainer: React.FC<Props> = ({ location }) => {
     /*
      * Read value first
      */
-    const uint8Array = await WebBle.read(
-      deviceId,
-      serviceUuid,
-      characteristicUuid
-    );
+    try {
+      const uint8Array = await WebBle.read(
+        deviceId,
+        serviceUuid,
+        characteristicUuid
+      );
 
-    setRawData(uint8Array);
-
-    /*
-     * Subscribe to future notifications
-     */
-    WebBle.subscribe(deviceId, serviceUuid, characteristicUuid, uint8Array => {
       setRawData(uint8Array);
-    });
+
+      /*
+       * Subscribe to future notifications
+       */
+      WebBle.subscribe(
+        deviceId,
+        serviceUuid,
+        characteristicUuid,
+        uint8Array => {
+          setRawData(uint8Array);
+        }
+      );
+    } catch (error) {
+      setErrorMessage(error.message);
+    }
   };
 
   return (
@@ -155,6 +165,7 @@ const DetailViewContainer: React.FC<Props> = ({ location }) => {
       selectedCharacteristic={selectedCharacteristic}
       characteristics={characteristicsOptions}
       dataPoints={dataPoints}
+      errorMessage={errorMessage}
       handleDisconnectFromDevice={onDisconnectFromDevice}
       handleSelectService={onSelectService}
       handleSelectCharacteristic={onSelectCharacteristic}

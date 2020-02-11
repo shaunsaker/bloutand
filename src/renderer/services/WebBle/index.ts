@@ -101,7 +101,7 @@ const WebBle: WebBleProps = {
   read: (device, serviceUuid, characteristicUuid) => {
     console.log("Reading from", device, serviceUuid, characteristicUuid);
 
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
       const serviceUuidInt = parseInt(serviceUuid);
       const characteristicUuidInt = parseInt(characteristicUuid);
 
@@ -124,14 +124,14 @@ const WebBle: WebBleProps = {
 
             resolve(uint8Array);
           })
-          .catch(error => console.log(error));
+          .catch(error => reject(error));
       }
     });
   },
   subscribe: (device, serviceUuid, characteristicUuid, cb) => {
     console.log("Subscribing to", device, serviceUuid, characteristicUuid);
 
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
       const serviceUuidInt = parseInt(serviceUuid);
       const characteristicUuidInt = parseInt(characteristicUuid);
 
@@ -166,7 +166,7 @@ const WebBle: WebBleProps = {
               );
             });
           })
-          .catch(error => console.log(error));
+          .catch(error => reject(error));
       }
     });
   },

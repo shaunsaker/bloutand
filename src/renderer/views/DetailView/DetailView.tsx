@@ -1,7 +1,12 @@
 import React from "react";
 import { Cancel as CancelIcon } from "@material-ui/icons";
 
-import { ContentContainer, SelectsContainer, SelectContainer } from "./styles";
+import {
+  ContentContainer,
+  Text,
+  SelectsContainer,
+  SelectContainer
+} from "./styles";
 import Layout from "../../components/Layout";
 import ViewHeader from "../../components/ViewHeader";
 import Button from "../../components/Button";
@@ -21,6 +26,7 @@ export interface Props {
   selectedCharacteristic?: CharacteristicName;
   characteristics: CharacteristicName[];
   dataPoints: DataPoint[];
+  errorMessage?: string;
   handleSelectService: (selectedService: ServiceName) => void;
   handleSelectCharacteristic: (
     selectedCharacteristic: CharacteristicName
@@ -35,6 +41,7 @@ const DetailView: React.FC<Props> = ({
   selectedCharacteristic,
   characteristics,
   dataPoints,
+  errorMessage,
   handleSelectService,
   handleSelectCharacteristic,
   handleDisconnectFromDevice
@@ -52,6 +59,8 @@ const DetailView: React.FC<Props> = ({
       </ViewHeader>
 
       <ContentContainer>
+        {errorMessage ? <Text>Error: {errorMessage}</Text> : null}
+
         <SelectsContainer>
           <SelectContainer>
             <Select

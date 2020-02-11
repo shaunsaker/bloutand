@@ -45,4 +45,18 @@ storiesOf("Views|DetailView", module)
       handleSelectCharacteristic={handleSelectCharacteristic}
       handleDisconnectFromDevice={handleDisconnectFromDevice}
     />
+  ))
+  .add("with error message", () => (
+    <DetailView
+      device={devices[0]}
+      selectedService={serviceOptions[0]}
+      services={serviceOptions}
+      selectedCharacteristic={characteristicsOptions[0]}
+      characteristics={characteristicsOptions}
+      dataPoints={deviceLogData}
+      errorMessage="Device does not support this characeristic."
+      handleSelectService={handleSelectService}
+      handleSelectCharacteristic={handleSelectCharacteristic}
+      handleDisconnectFromDevice={handleDisconnectFromDevice}
+    />
   ));

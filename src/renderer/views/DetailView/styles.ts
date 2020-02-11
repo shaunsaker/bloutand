@@ -14,3 +14,10 @@ export const SelectsContainer = styled.div`
 export const SelectContainer = styled.div`
   margin-right: ${rhythm.hz}px;
 `;
+
+export const Text = styled.p`
+  font-family: "Source Sans Pro", san-serif;
+  font-size: 16px;
+  color: #f44336;
+  margin-bottom: ${rhythm.vt}px;
+`;
