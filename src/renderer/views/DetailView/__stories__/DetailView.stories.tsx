@@ -54,7 +54,7 @@ storiesOf("Views|DetailView", module)
       selectedCharacteristic={characteristicsOptions[0]}
       characteristics={characteristicsOptions}
       dataPoints={deviceLogData}
-      errorMessage="Device does not support this characeristic."
+      errorMessage="Device does not support this characteristic."
       handleSelectService={handleSelectService}
       handleSelectCharacteristic={handleSelectCharacteristic}
       handleDisconnectFromDevice={handleDisconnectFromDevice}
