@@ -18,6 +18,11 @@ export interface Props {
   handleRescanForDevices: () => void;
 }
 
+/*
+ * Export this for use in our tests
+ */
+export const scanningText = "Scanning for devices...";
+
 const ScanningView: React.FC<Props> = ({
   devices,
   isScanning,
@@ -35,7 +40,7 @@ const ScanningView: React.FC<Props> = ({
             : isConnectingDeviceId
             ? "Connecting..."
             : isScanning
-            ? "Scanning for devices..."
+            ? scanningText
             : "Discovered Devices"
         }
       >
