@@ -26,6 +26,10 @@ export interface WebBleProps {
 const optionalServices: number[] = services.map(({ serviceUuid }) =>
   parseInt(serviceUuid)
 );
+
+/*
+ * These variables are reassigned later so that we can access them in other methods of the WebBle
+ */
 let connectedDevice: BluetoothDevice | null = null;
 let connectedServer: BluetoothRemoteGATTServer | null = null;
 let handleDisconnect = () => {}; // eslint-disable-line
@@ -48,7 +52,7 @@ const WebBle: WebBleProps = {
           device.addEventListener("gattserverdisconnected", handleDisconnect);
 
           /*
-           * Make this available globally
+           * Make this device available to other methods of the WebBle
            */
           connectedDevice = device;
 
@@ -58,6 +62,9 @@ const WebBle: WebBleProps = {
         })
         .then(server => {
           if (server) {
+            /*
+             * Make the server available to other methods of the WebBle
+             */
             connectedServer = server;
 
             if (connectedDevice) {
@@ -65,6 +72,8 @@ const WebBle: WebBleProps = {
             }
 
             resolve();
+          } else {
+            reject("Server not found.");
           }
         })
         .catch(error => {
@@ -76,6 +85,9 @@ const WebBle: WebBleProps = {
     return new Promise(resolve => {
       handleDisconnect = onDisconnect;
 
+      /*
+       * Send the selected device to channelForSelectingDevice (created in main.ts)
+       */
       ipcRenderer.send("channelForSelectingDevice", device);
 
       resolve();
