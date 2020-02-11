@@ -1,7 +1,7 @@
 import React from "react";
 import SyncRoundedIcon from "@material-ui/icons/SyncRounded";
 
-import { ContentContainer, DeviceItemContainer } from "./styles";
+import { ContentContainer, DeviceItemContainer, Text } from "./styles";
 import Layout from "../../components/Layout";
 import ViewHeader from "../../components/ViewHeader";
 import Button from "../../components/Button";
@@ -13,6 +13,7 @@ export interface Props {
   devices: Device[];
   isScanning?: boolean;
   isConnectingDeviceId?: DeviceId;
+  errorMessage?: string;
   handleConnectToDevice: (device: Device) => void;
   handleRescanForDevices: () => void;
 }
@@ -21,6 +22,7 @@ const ScanningView: React.FC<Props> = ({
   devices,
   isScanning,
   isConnectingDeviceId,
+  errorMessage,
   handleConnectToDevice,
   handleRescanForDevices
 }) => {
@@ -28,7 +30,9 @@ const ScanningView: React.FC<Props> = ({
     <Layout>
       <ViewHeader
         text={
-          isConnectingDeviceId
+          errorMessage
+            ? "Error"
+            : isConnectingDeviceId
             ? "Connecting..."
             : isScanning
             ? "Scanning for devices..."
@@ -48,7 +52,9 @@ const ScanningView: React.FC<Props> = ({
       </ViewHeader>
 
       <ContentContainer>
-        {isScanning ? (
+        {errorMessage ? (
+          <Text>{errorMessage}</Text>
+        ) : isScanning ? (
           <>
             <DeviceItemContainer>
               <Skeleton />

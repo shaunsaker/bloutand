@@ -9,3 +9,8 @@ export const ContentContainer = styled.div`
 export const DeviceItemContainer = styled.div`
   margin-bottom: ${rhythm.vt}px;
 `;
+
+export const Text = styled.p`
+  font-family: "Source Sans Pro", san-serif;
+  font-size: 16px;
+`;

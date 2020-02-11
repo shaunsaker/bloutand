@@ -22,25 +22,32 @@ const ScanningViewContainer: React.FC<Props> = ({ location }) => {
   const [isConnectingDeviceId, setIsConnectingDeviceId] = useState<DeviceId>(
     ""
   );
+  const [errorMessage, setErrorMessage] = useState<string>("");
   const [devices, setDevices] = useState<Device[]>([]);
 
-  const scanForDevices = () => {
+  const scanForDevices = async () => {
+    setErrorMessage(""); // reset any errors
     setIsScanning(true);
 
-    WebBle.startScanning((deviceId, deviceName) => {
-      /*
-       * On connect, push to the Detail view
-       */
-      history.push({
-        pathname: "/device",
-        state: {
-          deviceId,
-          deviceName
-        }
-      });
+    try {
+      await WebBle.startScanning((deviceId, deviceName) => {
+        /*
+         * On connect, push to the Detail view
+         */
+        history.push({
+          pathname: "/device",
+          state: {
+            deviceId,
+            deviceName
+          }
+        });
 
-      setIsConnectingDeviceId("");
-    });
+        setIsConnectingDeviceId("");
+      });
+    } catch (error) {
+      setErrorMessage(error.message);
+      setIsScanning(false);
+    }
   };
 
   const onRescanForDevices = () => {
@@ -80,6 +87,7 @@ const ScanningViewContainer: React.FC<Props> = ({ location }) => {
       devices={devices}
       isScanning={isScanning}
       isConnectingDeviceId={isConnectingDeviceId}
+      errorMessage={errorMessage}
       handleRescanForDevices={onRescanForDevices}
       handleConnectToDevice={onConnectToDevice}
     />

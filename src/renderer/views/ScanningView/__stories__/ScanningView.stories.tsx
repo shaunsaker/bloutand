@@ -25,10 +25,18 @@ storiesOf("Views|ScanningView", module)
       handleRescanForDevices={handleRescanForDevices}
     />
   ))
-  .add("connecting to de vice", () => (
+  .add("connecting to device", () => (
     <ScanningView
       devices={devices}
       isConnectingDeviceId={devices[1].deviceId}
+      handleConnectToDevice={handleConnectToDevice}
+      handleRescanForDevices={handleRescanForDevices}
+    />
+  ))
+  .add("with error message", () => (
+    <ScanningView
+      devices={devices}
+      errorMessage="Some error message."
       handleConnectToDevice={handleConnectToDevice}
       handleRescanForDevices={handleRescanForDevices}
     />
