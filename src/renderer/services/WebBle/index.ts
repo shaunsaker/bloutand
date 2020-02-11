@@ -2,11 +2,12 @@ import { ipcRenderer } from "electron";
 
 import { DeviceId } from "../../types";
 import { services } from "../../config";
-
-type StartScanningCb = (device: DeviceId, name: string) => void;
+import convertDataViewToUint8Array from "./convertDataViewToUint8Array";
 
 export interface WebBleProps {
-  startScanning: (cb: StartScanningCb) => Promise<void>;
+  startScanning: (
+    cb: (device: DeviceId, name: string) => void
+  ) => Promise<void>;
   connect: (device: DeviceId, onDisconnect: () => void) => Promise<void>;
   read: (
     device: DeviceId,
@@ -27,25 +28,14 @@ const optionalServices: number[] = services.map(({ serviceUuid }) =>
 );
 let connectedDevice: BluetoothDevice | null = null;
 let connectedServer: BluetoothRemoteGATTServer | null = null;
-let connectedCharacteristic: BluetoothRemoteGATTCharacteristic | null = null;
-let handleDisconnect = () => {}; // TODO: Type this
-const convertDataViewToUint8Array = (value: DataView) => {
-  const { byteLength } = value;
-  const uint8Array = new Uint8Array(byteLength);
-
-  for (let i = 0; i < byteLength; i++) {
-    uint8Array[i] = value.getUint8(i);
-  }
-
-  return uint8Array;
-};
+let handleDisconnect = () => {}; // eslint-disable-line
 
 const WebBle: WebBleProps = {
   startScanning: cb => {
     return new Promise((resolve, reject) => {
       const options = {
         acceptAllDevices: true,
-        optionalServices
+        optionalServices // attach these so that we don't get a not allowed error later
       };
 
       navigator.bluetooth
@@ -126,18 +116,18 @@ const WebBle: WebBleProps = {
             return service.getCharacteristic(characteristicUuidInt);
           })
           .then(characteristic => {
-            connectedCharacteristic = characteristic;
-
-            return connectedCharacteristic.startNotifications().then(() => {
-              connectedCharacteristic?.addEventListener(
+            return characteristic.startNotifications().then(() => {
+              characteristic?.addEventListener(
                 "characteristicvaluechanged",
 
-                event => {
-                  // @ts-ignore FIXME: Type this event (value does not exist apparently)
-                  const { value } = event.target;
-                  const uint8Array = convertDataViewToUint8Array(value);
+                (event: any) => {
+                  // FIXME: When using Event as the type, I get: "Property 'value' does not exist on type 'EventTarget'"
+                  if (event.target) {
+                    const { value } = event.target;
+                    const uint8Array = convertDataViewToUint8Array(value);
 
-                  cb(uint8Array);
+                    cb(uint8Array);
+                  }
                 }
               );
             });

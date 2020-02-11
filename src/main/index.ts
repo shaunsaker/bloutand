@@ -1,5 +1,5 @@
 import { app, BrowserWindow, ipcMain } from "electron";
-declare var MAIN_WINDOW_WEBPACK_ENTRY: any;
+declare var MAIN_WINDOW_WEBPACK_ENTRY: any; // eslint-disable-line
 
 /*
  * Enable the web bluetooth api
@@ -23,7 +23,12 @@ if (require("electron-squirrel-startup")) {
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow: any;
 
-let callbackForBluetoothEvent = (deviceId: string) => {}; // TODO: Type this
+type BluetoothEventCallback = (deviceId: string) => void;
+
+/*
+ * Empty callback to be reassigned later
+ */
+let callbackForBluetoothEvent: BluetoothEventCallback = () => {}; // eslint-disable-line
 
 const createWindow = () => {
   // Create the browser window.
@@ -39,9 +44,11 @@ const createWindow = () => {
    */
   mainWindow.webContents.on(
     "select-bluetooth-device",
-    (event: any, deviceList: any, callback: any) => {
-      // TODO: Add types to args
-
+    (
+      event: Event,
+      deviceList: BluetoothDevice[],
+      callback: BluetoothEventCallback
+    ) => {
       event.preventDefault();
 
       /*
