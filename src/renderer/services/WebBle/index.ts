@@ -77,7 +77,15 @@ const WebBle: WebBleProps = {
           }
         })
         .catch(error => {
-          reject(error);
+          /*
+           *
+           */
+          if (error.message === "User cancelled the requestDevice() chooser.") {
+            console.log(error.message);
+            resolve();
+          } else {
+            reject(error);
+          }
         });
     });
   },
