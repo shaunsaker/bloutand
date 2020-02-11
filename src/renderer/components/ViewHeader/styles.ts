@@ -4,10 +4,15 @@ import { colors, rhythm } from "../../config";
 
 export const Container = styled.div`
   position: relative;
+
+  padding: ${rhythm.vt * 4}px 0 ${rhythm.vt}px;
+`;
+
+export const TextContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: ${rhythm.vt * 4}px 0 ${rhythm.vt}px;
+  min-height: 36px; /* use this so when button children are added the height remains the same and looks more graceful */
 `;
 
 export const Text = styled.h1`

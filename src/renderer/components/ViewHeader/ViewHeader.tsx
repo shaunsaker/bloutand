@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 
-import { Container, Text, Border } from "./styles";
+import { Container, TextContainer, Text, Border } from "./styles";
 
 export interface Props {
   text: string;
@@ -10,9 +10,11 @@ export interface Props {
 const ViewHeader: React.FC<Props> = ({ text, children }) => {
   return (
     <Container>
-      <Text>{text}</Text>
+      <TextContainer>
+        <Text>{text}</Text>
 
-      {children}
+        {children}
+      </TextContainer>
 
       <Border />
     </Container>
