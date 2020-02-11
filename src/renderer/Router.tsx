@@ -11,7 +11,7 @@ const Router = () => {
       <div>
         <Route path="/" exact component={HomeView} />
         <Route path="/devices" exact component={ScanningView} />
-        <Route path="/device/:deviceId" exact component={DetailView} />
+        <Route path="/device" exact component={DetailView} />
       </div>
     </HashRouter>
   );

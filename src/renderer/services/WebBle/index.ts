@@ -18,9 +18,11 @@ export interface WebBleProps {
   //   characteristicUuid: string,
   //   cb: (data: Uint8Array) => void
   // ) => Promise<void>;
-  // disconnect: (device: DeviceId) => Promise<void>;
+  disconnect: (device: DeviceId) => Promise<void>;
 }
 
+let connectedDevice: BluetoothDevice | null = null;
+let connectedServer: BluetoothRemoteGATTServer | null = null;
 let handleDisconnect = () => {}; // TODO: Type this
 
 const WebBle: WebBleProps = {
@@ -33,15 +35,31 @@ const WebBle: WebBleProps = {
       navigator.bluetooth
         .requestDevice(options)
         .then(device => {
-          const { id, name = "" } = device;
-
+          /*
+           * Once a device is selected (handled by connect method)
+           * Connect to it
+           */
           device.addEventListener("gattserverdisconnected", handleDisconnect);
 
-          device && device.gatt && device.gatt.connect();
+          /*
+           * Make this available globally
+           */
+          connectedDevice = device;
 
-          cb(id, name);
+          if (device && device.gatt) {
+            return device.gatt.connect();
+          }
+        })
+        .then(server => {
+          if (server) {
+            connectedServer = server;
 
-          resolve();
+            if (connectedDevice) {
+              cb(connectedDevice.id, connectedDevice.name || "");
+            }
+
+            resolve();
+          }
         })
         .catch(error => {
           reject(error);
@@ -53,6 +71,27 @@ const WebBle: WebBleProps = {
       handleDisconnect = onDisconnect;
 
       ipcRenderer.send("channelForSelectingDevice", device);
+
+      resolve();
+    });
+  },
+  disconnect: device => {
+    return new Promise(resolve => {
+      /*
+       * Disconnect from the device if the gatt server is available
+       * And if it is connected
+       * And if the device id matches
+       */
+      if (
+        connectedServer &&
+        connectedServer.connected &&
+        connectedServer.device.id === device
+      ) {
+        connectedServer.disconnect();
+      }
+
+      connectedDevice = null;
+      connectedServer = null;
 
       resolve();
     });

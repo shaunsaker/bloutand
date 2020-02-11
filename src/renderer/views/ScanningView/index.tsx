@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { RouteComponentProps, withRouter } from "react-router-dom";
+import { RouteComponentProps, withRouter, useHistory } from "react-router-dom";
 import { ipcRenderer } from "electron";
 
 import ScanningView from "./ScanningView";
@@ -17,6 +17,7 @@ interface Props extends RouteComponentProps<any> {
 }
 
 const ScanningViewContainer: React.FC<Props> = ({ location }) => {
+  const history = useHistory();
   const [isScanning, setIsScanning] = useState<boolean>(false);
   const [devices, setDevices] = useState<Device[]>([]);
 
@@ -24,7 +25,16 @@ const ScanningViewContainer: React.FC<Props> = ({ location }) => {
     setIsScanning(true);
 
     WebBle.startScanning((deviceId, deviceName) => {
-      // TODO: This is essentially onConnect
+      /*
+       * On connect, push to the Detail view
+       */
+      history.push({
+        pathname: "/device",
+        state: {
+          deviceId,
+          deviceName
+        }
+      });
     });
   };
 
@@ -34,7 +44,7 @@ const ScanningViewContainer: React.FC<Props> = ({ location }) => {
 
   const onConnectToDevice = (device: Device) => {
     WebBle.connect(device.deviceId, () => {
-      // TODO: Handle disconnect
+      console.log("Device disconnected.");
     });
   };
 
