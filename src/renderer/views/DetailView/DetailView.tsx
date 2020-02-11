@@ -20,7 +20,7 @@ export interface Props {
   services: ServiceName[];
   selectedCharacteristic?: CharacteristicName;
   characteristics: CharacteristicName[];
-  data: DataPoint[];
+  dataPoints: DataPoint[];
   handleSelectService: (selectedService: ServiceName) => void;
   handleSelectCharacteristic: (
     selectedCharacteristic: CharacteristicName
@@ -34,7 +34,7 @@ const DetailView: React.FC<Props> = ({
   services,
   selectedCharacteristic,
   characteristics,
-  data,
+  dataPoints,
   handleSelectService,
   handleSelectCharacteristic,
   handleDisconnectFromDevice
@@ -72,8 +72,11 @@ const DetailView: React.FC<Props> = ({
           </SelectContainer>
         </SelectsContainer>
 
-        {data.length ? (
-          <DeviceLog yAxisTitle={selectedCharacteristic || ""} data={data} />
+        {dataPoints.length ? (
+          <DeviceLog
+            yAxisTitle={selectedCharacteristic || ""}
+            data={dataPoints}
+          />
         ) : null}
       </ContentContainer>
     </Layout>

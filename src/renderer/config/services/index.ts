@@ -10,4 +10,4 @@ const services: Service[] = [
   }
 ];
 
-export default services;
+export { services };

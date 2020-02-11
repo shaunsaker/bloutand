@@ -42,19 +42,19 @@ export const characteristics: Characteristic[] = [
 
 export const deviceLogData: DataPoint[] = [
   {
-    x: 1,
-    y: 1.0
+    x: new Date(2020, 2, 11, 11, 50, 35),
+    y: 100
   },
   {
-    x: 2,
-    y: 0.8
+    x: new Date(2020, 2, 11, 11, 52, 35),
+    y: 80
   },
   {
-    x: 3,
-    y: 0.7
+    x: new Date(2020, 2, 11, 11, 53, 35),
+    y: 70
   },
   {
-    x: 4,
-    y: 0.65
+    x: new Date(2020, 2, 11, 11, 59, 35),
+    y: 65
   }
 ];

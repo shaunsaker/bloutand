@@ -10,4 +10,4 @@ const characteristics: Characteristic[] = [
   }
 ];
 
-export default characteristics;
+export { characteristics };

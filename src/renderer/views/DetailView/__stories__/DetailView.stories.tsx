@@ -27,20 +27,20 @@ storiesOf("Views|DetailView", module)
       device={devices[0]}
       services={serviceOptions}
       characteristics={characteristicsOptions}
-      data={[]}
+      dataPoints={[]}
       handleSelectService={handleSelectService}
       handleSelectCharacteristic={handleSelectCharacteristic}
       handleDisconnectFromDevice={handleDisconnectFromDevice}
     />
   ))
-  .add("with data", () => (
+  .add("with data points", () => (
     <DetailView
       device={devices[0]}
       selectedService={serviceOptions[0]}
       services={serviceOptions}
       selectedCharacteristic={characteristicsOptions[0]}
       characteristics={characteristicsOptions}
-      data={deviceLogData}
+      dataPoints={deviceLogData}
       handleSelectService={handleSelectService}
       handleSelectCharacteristic={handleSelectCharacteristic}
       handleDisconnectFromDevice={handleDisconnectFromDevice}

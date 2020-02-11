@@ -8,6 +8,7 @@ import {
   LineMarkSeries
 } from "react-vis";
 import "react-vis/dist/style.css";
+import moment from "moment";
 
 import styles from "./styles";
 import { colors } from "../../config";
@@ -20,14 +21,28 @@ export interface Props {
 
 const DeviceLog: React.FC<Props> = ({ yAxisTitle, data }) => {
   return (
-    <XYPlot width={552} height={300} style={styles.xyPlot}>
+    <XYPlot
+      xType="ordinal"
+      yDomain={[0, 100]}
+      width={552}
+      height={300}
+      animation
+      style={styles.xyPlot}
+    >
       <VerticalGridLines />
 
       <HorizontalGridLines />
 
-      <LineMarkSeries color={colors.primary} animation data={data} />
+      <LineMarkSeries color={colors.primary} data={data} animation />
 
-      <XAxis title="Time" position="middle" style={styles.axes} />
+      <XAxis
+        title="Time"
+        position="middle"
+        tickFormat={value => {
+          return moment(value).format("HH:mm:ss");
+        }}
+        style={styles.axes}
+      />
 
       <YAxis title={yAxisTitle} position="middle" style={styles.axes} />
     </XYPlot>

@@ -24,6 +24,6 @@ export type Characteristic = {
 };
 
 export interface DataPoint {
-  x: number;
+  x: number | string | Date;
   y: number;
 }
