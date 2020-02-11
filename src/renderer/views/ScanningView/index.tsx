@@ -4,7 +4,7 @@ import { ipcRenderer } from "electron";
 
 import ScanningView from "./ScanningView";
 import WebBle from "../../services/WebBle";
-import { Device } from "../../types";
+import { Device, DeviceId } from "../../types";
 
 interface LocationProps extends Location {
   state: {
@@ -19,6 +19,9 @@ interface Props extends RouteComponentProps<any> {
 const ScanningViewContainer: React.FC<Props> = ({ location }) => {
   const history = useHistory();
   const [isScanning, setIsScanning] = useState<boolean>(false);
+  const [isConnectingDeviceId, setIsConnectingDeviceId] = useState<DeviceId>(
+    ""
+  );
   const [devices, setDevices] = useState<Device[]>([]);
 
   const scanForDevices = () => {
@@ -35,6 +38,8 @@ const ScanningViewContainer: React.FC<Props> = ({ location }) => {
           deviceName
         }
       });
+
+      setIsConnectingDeviceId("");
     });
   };
 
@@ -43,6 +48,8 @@ const ScanningViewContainer: React.FC<Props> = ({ location }) => {
   };
 
   const onConnectToDevice = (device: Device) => {
+    setIsConnectingDeviceId(device.deviceId);
+
     WebBle.connect(device.deviceId, () => {
       console.log("Device disconnected.");
     });
@@ -72,6 +79,7 @@ const ScanningViewContainer: React.FC<Props> = ({ location }) => {
     <ScanningView
       devices={devices}
       isScanning={isScanning}
+      isConnectingDeviceId={isConnectingDeviceId}
       handleRescanForDevices={onRescanForDevices}
       handleConnectToDevice={onConnectToDevice}
     />

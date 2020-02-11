@@ -5,21 +5,29 @@ import { Container, Text } from "./styles";
 import Button from "../Button";
 
 export interface Props {
+  isLoading?: boolean;
+  disabled?: boolean;
   handleClick: () => void;
   children: ReactNode;
 }
 
-const DeviceItem: React.FC<Props> = ({ handleClick, children }) => {
+const DeviceItem: React.FC<Props> = ({
+  isLoading,
+  disabled,
+  handleClick,
+  children
+}) => {
   return (
     <Container>
       <Text>{children}</Text>
 
       <Button
         kind="primary"
-        endIcon={<ArrowForwardIcon />}
+        endIcon={!isLoading ? <ArrowForwardIcon /> : null}
+        disabled={disabled}
         onClick={handleClick}
       >
-        Connect
+        {isLoading ? "Connecting..." : "Connect"}
       </Button>
     </Container>
   );

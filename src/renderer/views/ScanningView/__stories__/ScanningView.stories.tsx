@@ -24,4 +24,12 @@ storiesOf("Views|ScanningView", module)
       handleConnectToDevice={handleConnectToDevice}
       handleRescanForDevices={handleRescanForDevices}
     />
+  ))
+  .add("connecting to de vice", () => (
+    <ScanningView
+      devices={devices}
+      isConnectingDeviceId={devices[1].deviceId}
+      handleConnectToDevice={handleConnectToDevice}
+      handleRescanForDevices={handleRescanForDevices}
+    />
   ));

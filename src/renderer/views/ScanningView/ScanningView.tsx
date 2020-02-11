@@ -7,11 +7,12 @@ import ViewHeader from "../../components/ViewHeader";
 import Button from "../../components/Button";
 import Skeleton from "../../components/Skeleton";
 import DeviceItem from "../../components/DeviceItem";
-import { Device } from "../../types";
+import { Device, DeviceId } from "../../types";
 
 export interface Props {
   devices: Device[];
   isScanning?: boolean;
+  isConnectingDeviceId?: DeviceId;
   handleConnectToDevice: (device: Device) => void;
   handleRescanForDevices: () => void;
 }
@@ -19,18 +20,26 @@ export interface Props {
 const ScanningView: React.FC<Props> = ({
   devices,
   isScanning,
+  isConnectingDeviceId,
   handleConnectToDevice,
   handleRescanForDevices
 }) => {
   return (
     <Layout>
       <ViewHeader
-        text={isScanning ? "Scanning for devices..." : "Discovered Devices"}
+        text={
+          isConnectingDeviceId
+            ? "Connecting..."
+            : isScanning
+            ? "Scanning for devices..."
+            : "Discovered Devices"
+        }
       >
         {!isScanning ? (
           <Button
             kind="secondary"
             endIcon={<SyncRoundedIcon />}
+            disabled={Boolean(isConnectingDeviceId)}
             onClick={handleRescanForDevices}
           >
             RESCAN
@@ -55,7 +64,11 @@ const ScanningView: React.FC<Props> = ({
 
             return (
               <DeviceItemContainer key={deviceId}>
-                <DeviceItem handleClick={() => handleConnectToDevice(device)}>
+                <DeviceItem
+                  isLoading={isConnectingDeviceId === deviceId}
+                  disabled={Boolean(isConnectingDeviceId)}
+                  handleClick={() => handleConnectToDevice(device)}
+                >
                   {deviceName || deviceId}
                 </DeviceItem>
               </DeviceItemContainer>
