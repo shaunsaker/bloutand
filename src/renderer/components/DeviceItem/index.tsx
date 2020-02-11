@@ -24,7 +24,7 @@ const DeviceItem: React.FC<Props> = ({
       <Button
         kind="primary"
         endIcon={!isLoading ? <ArrowForwardIcon /> : null}
-        disabled={disabled}
+        disabled={disabled || isLoading}
         onClick={handleClick}
       >
         {isLoading ? "Connecting..." : "Connect"}
