@@ -4,7 +4,7 @@ Hello :)
 
 I documented my process (notes, resouces, game plan and UI planning) in this [Google Doc](https://docs.google.com/document/d/1G4ktM_NMGH9YWKeMwRHlfTaRlELUgkepBf6Pu5duEpQ/edit?usp=sharing).
 
-The UI was developed in isolation of the Electron app using [Storybook](). You can view it by runnning the command `yarn run storybook` (don't forget to `yarn` if you haven't done so already).
+The UI was developed in isolation of the Electron app using [Storybook](). You can view it by runnning the command `npm run storybook` (don't forget to `npm install` if you haven't done so already).
 
 I have a list of things that I could not finish but that I'd still like to implement/improve on, these include:
 
