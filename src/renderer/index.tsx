@@ -3,4 +3,7 @@ import { render } from "react-dom";
 
 import App from "./App";
 
-render(<App />, document.getElementById("root"));
+const mainElement = document.createElement("div");
+document.body.appendChild(mainElement);
+
+render(<App />, mainElement);

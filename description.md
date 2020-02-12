@@ -28,3 +28,5 @@ I have a list of things that I could not finish but that I'd still like to imple
   - convertDataViewToUint8Array
   - WebBle (I started writing tests for this, even found an awesome [web-bluetooth-mock](https://github.com/urish/web-bluetooth-mock) but it quickly got hairy so I thought I would focus on the component tests first)
 - Write E2E tests using [spectron](https://github.com/electron-userland/spectron)
+- Use redux instead of route location state (can be more controlled, more scalable and easier to test with actions)
+- Add App icon

@@ -10,27 +10,31 @@ An electron app written in Typescript and React that can scan for nearby BLE dev
 
 ```
 git clone https://github.com/shaunsaker/bloutand.git
-yarn
+npm install
 ```
 
 ### Run the app
 
 ```
-yarn start
+npm run start-dev
 ```
 
 ### Storybook
 
 ```
-yarn run storybook
+npm run run storybook
 ```
 
 ### Testing
 
 ```
-yarn test
+npm run test
 ```
 
-## Building
+## Packaging
 
-TODO: Complete this
+```
+npm run run dist
+```
+
+Distributables will be found in the `./dist` folder.

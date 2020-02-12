@@ -1,8 +1,9 @@
 import { app, BrowserWindow, ipcMain } from "electron";
-declare var MAIN_WINDOW_WEBPACK_ENTRY: any; // eslint-disable-line
+import * as path from "path";
+import * as url from "url";
 
 /*
- * Enable the web bluetooth api
+ * Enable the web bluetooth api on linux
  */
 if (process.platform === "linux") {
   app.commandLine.appendSwitch(
@@ -11,6 +12,9 @@ if (process.platform === "linux") {
   );
 }
 
+/*
+ * Enable the web bluetooth api in general
+ */
 app.commandLine.appendSwitch("enable-web-bluetooth", "true");
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -30,7 +34,21 @@ type BluetoothEventCallback = (deviceId: string) => void;
  */
 let callbackForBluetoothEvent: BluetoothEventCallback = () => {}; // eslint-disable-line
 
-const createWindow = () => {
+const installExtensions = async () => {
+  const installer = require("electron-devtools-installer");
+  const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
+  const extensions = ["REACT_DEVELOPER_TOOLS", "REDUX_DEVTOOLS"];
+
+  return Promise.all(
+    extensions.map(name => installer.default(installer[name], forceDownload))
+  ).catch(console.log);
+};
+
+const createWindow = async () => {
+  if (process.env.NODE_ENV !== "production") {
+    await installExtensions();
+  }
+
   // Create the browser window.
   mainWindow = new BrowserWindow({
     fullscreen: true,
@@ -60,12 +78,24 @@ const createWindow = () => {
     }
   );
 
-  // and load the index.html of the app.
-  mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
+  if (process.env.NODE_ENV !== "production") {
+    process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = "1"; // eslint-disable-line require-atomic-updates
+    mainWindow.loadURL(`http://localhost:2003`);
+  } else {
+    mainWindow.loadURL(
+      url.format({
+        pathname: path.join(__dirname, "index.html"),
+        protocol: "file:",
+        slashes: true
+      })
+    );
+  }
 
-  // Open the DevTools in development only.
-  if (!app.isPackaged) {
-    mainWindow.webContents.openDevTools();
+  if (process.env.NODE_ENV !== "production") {
+    // Open DevTools, see https://github.com/electron/electron/issues/12438 for why we wait for dom-ready
+    mainWindow.webContents.once("dom-ready", () => {
+      mainWindow.webContents.openDevTools();
+    });
   }
 
   // Emitted when the window is closed.
