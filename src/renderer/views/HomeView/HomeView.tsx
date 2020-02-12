@@ -1,7 +1,7 @@
 import React from "react";
 import SyncRoundedIcon from "@material-ui/icons/SyncRounded";
 
-import { Container, Text } from "./styles";
+import { Container, TitleText, Text } from "./styles";
 import Layout from "../../components/Layout";
 import Button from "../../components/Button";
 
@@ -13,7 +13,9 @@ const HomeView: React.FC<Props> = ({ handleScanForDevices }) => {
   return (
     <Layout>
       <Container>
-        <Text>Get started by finding nearby devices...</Text>
+        <TitleText>Get started by finding nearby devices...</TitleText>
+
+        <Text>Make sure that your Bluetooth is turned on.</Text>
 
         <Button
           kind="primary"
